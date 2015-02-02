@@ -10,5 +10,6 @@ package Dao;
  * @author IDRISS
  */
 public class Test {
+    int x;
     
 }
