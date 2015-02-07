@@ -14,11 +14,18 @@ import java.util.Objects;
  */
 public class Reclamation {
     
-  private String idReclamation;
+  private int idReclamation;
   private Date dateReclamation;
   private String contenuReclamation;
 
-    public Reclamation(String idReclamation, Date dateReclamation, String contenuReclamation) {
+    public Reclamation(Date dateReclamation, String contenuReclamation) {
+        this.dateReclamation = dateReclamation;
+        this.contenuReclamation = contenuReclamation;
+    }
+  
+  
+
+    public Reclamation(int idReclamation, Date dateReclamation, String contenuReclamation) {
         this.idReclamation = idReclamation;
         this.dateReclamation = dateReclamation;
         this.contenuReclamation = contenuReclamation;
@@ -27,11 +34,11 @@ public class Reclamation {
     public Reclamation() {
     }
 
-    public String getIdReclamation() {
+    public int getIdReclamation() {
         return idReclamation;
     }
 
-    public void setIdReclamation(String idReclamation) {
+    public void setIdReclamation(int idReclamation) {
         this.idReclamation = idReclamation;
     }
 
