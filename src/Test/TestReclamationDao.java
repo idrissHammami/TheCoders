@@ -40,7 +40,7 @@ System.out.println(dateFormat.format(date));
     IReclamationDao iRec = new ReclamationDao();
     rec.setContenuReclamation("contenu1");
     rec.setDateReclamation(date);
-    iRec.insertReclamation(rec);
+   // iRec.insertReclamation(rec);
    // iRec.updateReclamation(rec);
    // iRec.deleteReclamation(4);
     
@@ -52,7 +52,7 @@ System.out.println(dateFormat.format(date));
       //     System.out.println(e);
      //  }
     
-      //  System.out.println(iRec.retrieveReclamationById(10));
+       System.out.println(iRec.retrieveReclamationById(10));
     
     Offre of = new Offre();
     

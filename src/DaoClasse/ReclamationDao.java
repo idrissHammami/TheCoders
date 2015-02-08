@@ -19,6 +19,7 @@ import static java.util.Date.parse;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sun.rmi.transport.DGCAckHandler;
 
 /**
  *
@@ -87,18 +88,20 @@ String requete="UPDATE reclamation set id_expediteur=? where Contenu=?";
 
     @Override
     public Reclamation retrieveReclamationById(int id) {
-        
-        String requete ="select * from reclamation where id="+ id;
+                        Reclamation rec = new Reclamation();
 
-           try{
+        String requete ="select * from reclamation where id="+id;
+        try{
             Statement statement= connexion.createStatement();
             ResultSet resultat = statement.executeQuery(requete);
-            
-                Reclamation rec = new Reclamation();
+            if (resultat.next())
+            {
                 rec.setIdReclamation(resultat.getInt(1));
                 rec.setDateReclamation(resultat.getDate(2));
                 rec.setContenuReclamation(resultat.getString(3));
-           return rec;
+                
+            }
+            return rec;
             
         }catch (SQLException ex){
             System.out.println("erreur lors du chargement des reclamations "+ex.getMessage());
