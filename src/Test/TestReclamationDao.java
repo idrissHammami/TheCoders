@@ -5,9 +5,9 @@
  */
 package Test;
 
-import DaoClasse.OffreDao;
+import DaoClasse.OffreDAO;
 import DaoClasse.ReclamationDao;
-import DaoInterface.IOffreDao;
+import DaoInterface.IOffreDAO;
 import DaoInterface.IReclamationDao;
 import Entites.Offre;
 import Entites.Reclamation;
@@ -58,7 +58,7 @@ System.out.println(dateFormat.format(date));
     
 of.setId(8);
 
-IOffreDao iOf = new OffreDao();
+//IOffreDAO iOf = new IOffreDAO();
  // iOf.insertOffre(of);
 
     }

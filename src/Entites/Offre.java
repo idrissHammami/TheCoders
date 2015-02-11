@@ -10,35 +10,57 @@ import java.util.Objects;
 
 /**
  *
- * @author IDRISS
+ * @author GaiaDev
  */
 public class Offre {
-    public int idoffre;
-    public String nom;
-    public int tarif;
-    public Date datedebut;
-    public Date datefin;
-    public String description;
-
-    public Offre(int id, String nom, int tarif, Date datedebut, Date datefin,String description) {
-        this.idoffre = id;
-        this.nom = nom;
-        this.tarif = tarif;
-        this.datedebut = datedebut;
-        this.datefin = datefin;
-        this.description=description;
-    }
-
-    public Offre() {
-    }
+    private int id ;
+    private String titre;
+    private float prix;
+    private String description;
+    private String date_debut;
+    private String date_fin;
     
+    public Offre(){}
 
-    public int getIdoffre() {
-        return idoffre;
+    public Offre(String titre, float prix, String description, String date_debut, String date_fin) {
+        this.titre = titre;
+        this.prix = prix;
+        this.description = description;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
     }
 
-    public void setIdoffre(int idoffre) {
-        this.idoffre = idoffre;
+    public Offre(int id, String titre, float prix, String description, String date_debut, String date_fin) {
+        this.id = id;
+        this.titre = titre;
+        this.prix = prix;
+        this.description = description;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public float getPrix() {
+        return prix;
+    }
+
+    public void setPrix(float prix) {
+        this.prix = prix;
     }
 
     public String getDescription() {
@@ -49,55 +71,36 @@ public class Offre {
         this.description = description;
     }
 
-  
-    public int getId() {
-        return idoffre;
+    public String getDate_debut() {
+        return date_debut;
     }
 
-    public void setId(int id) {
-        this.idoffre = id;
+    public void setDate_debut(String date_debut) {
+        this.date_debut = date_debut;
     }
 
-    public String getNom() {
-        return nom;
+    public String getDate_fin() {
+        return date_fin;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setDate_fin(String date_fin) {
+        this.date_fin = date_fin;
     }
 
-    public int getTarif() {
-        return tarif;
-    }
-
-    public void setTarif(int tarif) {
-        this.tarif = tarif;
-    }
-
-    public Date getDatedebut() {
-        return datedebut;
-    }
-
-    public void setDatedebut(Date datedebut) {
-        this.datedebut = datedebut;
-    }
-
-    public Date getDatefin() {
-        return datefin;
-    }
-
-    public void setDatefin(Date datefin) {
-        this.datefin = datefin;
+    @Override
+    public String toString() {
+        return "Offre{" + "id=" + id + ", titre=" + titre + ", prix=" + prix + ", description=" + description + ", date_debut=" + date_debut + ", date_fin=" + date_fin + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.idoffre;
-        hash = 79 * hash + Objects.hashCode(this.nom);
-        hash = 79 * hash + this.tarif;
-        hash = 79 * hash + Objects.hashCode(this.datedebut);
-        hash = 79 * hash + Objects.hashCode(this.datefin);
+        int hash = 3;
+        hash = 67 * hash + this.id;
+        hash = 67 * hash + Objects.hashCode(this.titre);
+        hash = 67 * hash + Float.floatToIntBits(this.prix);
+        hash = 67 * hash + Objects.hashCode(this.description);
+        hash = 67 * hash + Objects.hashCode(this.date_debut);
+        hash = 67 * hash + Objects.hashCode(this.date_fin);
         return hash;
     }
 
@@ -110,30 +113,27 @@ public class Offre {
             return false;
         }
         final Offre other = (Offre) obj;
-        if (this.idoffre != other.idoffre) {
+        if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.nom, other.nom)) {
+        if (!Objects.equals(this.titre, other.titre)) {
             return false;
         }
-        if (this.tarif != other.tarif) {
+        if (Float.floatToIntBits(this.prix) != Float.floatToIntBits(other.prix)) {
             return false;
         }
-        if (!Objects.equals(this.datedebut, other.datedebut)) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        return Objects.equals(this.datefin, other.datefin);
+        if (!Objects.equals(this.date_debut, other.date_debut)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_fin, other.date_fin)) {
+            return false;
+        }
+        return true;
     }
-
-    @Override
-    public String toString() {
-        return "Offre{" + "id=" + idoffre + ", nom=" + nom + ", tarif=" + tarif + ", datedebut=" + datedebut + ", datefin=" + datefin + '}';
-    }
-
-    
     
     
     
 }
-
-
