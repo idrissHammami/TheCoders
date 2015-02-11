@@ -5,21 +5,14 @@
  */
 package Test;
 
-import DaoClasse.OffreDAO;
 import DaoClasse.ReclamationDao;
-import DaoInterface.IOffreDAO;
 import DaoInterface.IReclamationDao;
 import Entites.Offre;
 import Entites.Reclamation;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
 
 /**
  *
