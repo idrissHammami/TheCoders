@@ -10,15 +10,13 @@ import java.util.List;
 
 /**
  *
- * @author IDRISS
+ * @author GaiaDev
  */
 public interface IOffreDao {
-     public boolean insertOffre(Offre depot);
-
-
-    public boolean updateOffre(Offre depot);
-    public boolean deleteOffre(int id);
-    public Offre retrieveOffreById(int id);
-    public List<Offre> retrieveAllOffre();
+    public void insertOffre(Offre offre);
+    public void updateOffre(Offre offre);
+    public void deleteOffre(int d);
+    public Offre retrievOffreById(int id);
+    public List<Offre> DisplayAllOffre();
     
 }
