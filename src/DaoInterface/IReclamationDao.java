@@ -7,6 +7,7 @@ package DaoInterface;
 
 import Entites.Reclamation;
 import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -17,5 +18,5 @@ public interface IReclamationDao {
     public boolean updateReclamation(Reclamation rec);
     public boolean deleteReclamation(int id);
     public Reclamation retrieveReclamationById(int id);
-    public List<Reclamation> retrieveAllReclamation();
+    public Vector<Reclamation> retrieveAllReclamation();
 }

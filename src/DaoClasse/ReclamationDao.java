@@ -9,17 +9,15 @@ import DaoInterface.IReclamationDao;
 import Entites.Reclamation;
 import Technique.MyConnection;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import static java.util.Date.parse;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.rmi.transport.DGCAckHandler;
 
 /**
  *
@@ -37,7 +35,7 @@ String requete="INSERT INTO reclamation ( `Contenu`,`id_expediteur`) VALUES (?,?
         
 
         pst.setString(1,rec.getContenuReclamation());
-        pst.setInt(2, 2);
+        pst.setInt(2, rec.getExpediteur().getId());
        
         pst.executeUpdate();
                     System.out.println("Ajout effectuee avec succes");
@@ -51,11 +49,11 @@ String requete="INSERT INTO reclamation ( `Contenu`,`id_expediteur`) VALUES (?,?
 
     @Override
     public boolean updateReclamation(Reclamation rec) {
-String requete="UPDATE reclamation set id_expediteur=? where Contenu=?";
+String requete="UPDATE reclamation set Contenu=? where id_expediteur=?";
         try{
         PreparedStatement pst = connexion.prepareStatement(requete);
-        pst.setInt(1,1);
-        pst.setString(2,rec.getContenuReclamation());
+        pst.setInt(2,rec.getExpediteur().getId());
+        pst.setString(1,rec.getContenuReclamation());
         pst.executeUpdate();
             System.out.println("Mise a jour effectuee avec succes");
         }
@@ -89,6 +87,7 @@ String requete="UPDATE reclamation set id_expediteur=? where Contenu=?";
     @Override
     public Reclamation retrieveReclamationById(int id) {
                         Reclamation rec = new Reclamation();
+                        
 
         String requete ="select * from reclamation where id="+id;
         try{
@@ -99,7 +98,6 @@ String requete="UPDATE reclamation set id_expediteur=? where Contenu=?";
                 rec.setIdReclamation(resultat.getInt(1));
                 rec.setDateReclamation(resultat.getDate(2));
                 rec.setContenuReclamation(resultat.getString(3));
-                
             }
             return rec;
             
@@ -110,8 +108,8 @@ String requete="UPDATE reclamation set id_expediteur=? where Contenu=?";
         }
 
     @Override
-    public List<Reclamation> retrieveAllReclamation() {
-        List<Reclamation> listRec =new ArrayList<Reclamation>();
+    public Vector<Reclamation> retrieveAllReclamation() {
+        Vector<Reclamation> listRec =new Vector<Reclamation>();
         String requete ="select * from reclamation";
         try{
             Statement statement= connexion.createStatement();

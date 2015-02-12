@@ -23,16 +23,12 @@ public class TestReclamationDao {
             
     {
         
-      
-  DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-Date date = new Date();
-System.out.println(dateFormat.format(date));
+ 
     
        
     Reclamation rec = new Reclamation();
     IReclamationDao iRec = new ReclamationDao();
     rec.setContenuReclamation("contenu1");
-    rec.setDateReclamation(date);
    // iRec.insertReclamation(rec);
    // iRec.updateReclamation(rec);
    // iRec.deleteReclamation(4);
