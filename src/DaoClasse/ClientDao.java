@@ -79,13 +79,14 @@ String requete="UPDATE utilisateur set nom=?, adresse=?, mail=?, tel=?,password=
     }
     @Override
     public boolean deleteClient(int id) {
-String requete="DELETE FROM utilisateur where id=?";
+       
+String requete="DELETE FROM utilisateur where id=? And nature=1";
         try{
         PreparedStatement pst = connexion.prepareStatement(requete);
         pst.setInt(1,id);
        
         pst.executeUpdate();
-            System.out.println("Suppression effectuee avec succes");
+          //  System.out.println("Suppression effectuee avec succes");
         }
         catch (SQLException ex){
             //Logger.getLogger(ReclamationDao.class.getName()).log(Level.SEVERE,null,ex);
@@ -102,7 +103,7 @@ String requete="DELETE FROM utilisateur where id=?";
         
   Client cl = new Client();
 
-        String requete ="select * from utilisateur where id="+id;
+        String requete ="select * from utilisateur where id="+id+" And nature=1";
         try{
             Statement statement= connexion.createStatement();
             ResultSet resultat = statement.executeQuery(requete);

@@ -78,7 +78,7 @@ String requete="UPDATE utilisateur set nom=?, adresse=?, mail=?, tel=?, password
 
     @Override
     public boolean deletePrestataire(int id) {
-String requete="DELETE FROM utilisateur where id=?";
+String requete="DELETE FROM utilisateur where id=? AND nature=0";
         try{
         PreparedStatement pst = connexion.prepareStatement(requete);
         pst.setInt(1,id);
@@ -100,7 +100,7 @@ String requete="DELETE FROM utilisateur where id=?";
     public Prestataire retrievePrestataireById(int id) {
         Prestataire prestataire = new Prestataire();
 
-        String requete ="select * from utilisateur where id="+id;
+        String requete ="select * from utilisateur where id="+id+" And nature=0";
         try{
             Statement statement= connexion.createStatement();
             ResultSet resultat = statement.executeQuery(requete);
