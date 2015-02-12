@@ -17,7 +17,10 @@ public class Reclamation {
   private int idReclamation;
   private Date dateReclamation;
   private String contenuReclamation;
+  private Utilisateur expediteur;
 
+  
+  
     public Reclamation(Date dateReclamation, String contenuReclamation) {
         this.dateReclamation = dateReclamation;
         this.contenuReclamation = contenuReclamation;
@@ -58,12 +61,21 @@ public class Reclamation {
         this.contenuReclamation = contenuReclamation;
     }
 
+    public Utilisateur getExpediteur() {
+        return expediteur;
+    }
+
+    public void setExpediteur(Utilisateur expediteur) {
+        this.expediteur = expediteur;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.idReclamation);
-        hash = 79 * hash + Objects.hashCode(this.dateReclamation);
-        hash = 79 * hash + Objects.hashCode(this.contenuReclamation);
+        int hash = 5;
+        hash = 17 * hash + this.idReclamation;
+        hash = 17 * hash + Objects.hashCode(this.dateReclamation);
+        hash = 17 * hash + Objects.hashCode(this.contenuReclamation);
+        hash = 17 * hash + Objects.hashCode(this.expediteur);
         return hash;
     }
 
@@ -76,7 +88,7 @@ public class Reclamation {
             return false;
         }
         final Reclamation other = (Reclamation) obj;
-        if (!Objects.equals(this.idReclamation, other.idReclamation)) {
+        if (this.idReclamation != other.idReclamation) {
             return false;
         }
         if (!Objects.equals(this.dateReclamation, other.dateReclamation)) {
@@ -85,15 +97,20 @@ public class Reclamation {
         if (!Objects.equals(this.contenuReclamation, other.contenuReclamation)) {
             return false;
         }
+        if (!Objects.equals(this.expediteur, other.expediteur)) {
+            return false;
+        }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Reclamation{" + "idReclamation=" + idReclamation + ", dateReclamation=" + dateReclamation + ", contenuReclamation=" + contenuReclamation + '}';
+  
+    
+    
+   
+  
+  public String toString() {
+        return "idReclamation=" + idReclamation + "     " + dateReclamation;
     }
-  
-  
   
   
 }
