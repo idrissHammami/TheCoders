@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author GaiaDev
+ * @author walid
  */
 public class Offre {
     private int id ;

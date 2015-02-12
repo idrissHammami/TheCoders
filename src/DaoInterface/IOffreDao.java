@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author GaiaDev
+ * @author walid
  */
 public interface IOffreDao {
     public void insertOffre(Offre offre);
