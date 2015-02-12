@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 /**
  *
- * @author IDRISS
+ * @author walid
  */
 public class MyConnection {
     Properties properties;

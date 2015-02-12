@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author GaiaDev
+ * @author wald
  */
 public class OffreDao implements IOffreDao{
     Connection connexion = MyConnection.getInstance();
