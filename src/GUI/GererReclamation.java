@@ -23,15 +23,15 @@ public class GererReclamation extends javax.swing.JFrame {
     /**
      * Creates new form GererReclamation
      */
+     IReclamationDao iRec = new ReclamationDao();
+ Vector<Reclamation> arr = iRec.retrieveAllReclamation();
     public GererReclamation() {
         initComponents();
-            IReclamationDao iRec = new ReclamationDao();
- Vector<Reclamation> arr = iRec.retrieveAllReclamation();
+           
         
          
     
            jList1.setListData(arr);
-      
  
     }
     
@@ -86,6 +86,11 @@ public class GererReclamation extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         jList1.setName(""); // NOI18N
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jTextArea1.setColumns(20);
@@ -184,6 +189,16 @@ public class GererReclamation extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        
+                   int selected = jList1.getSelectedIndex();
+          String contenue = arr.get(selected).getContenuReclamation();
+           jTextArea1.setText(String.valueOf(contenue));
+
+        
+    }//GEN-LAST:event_jList1ValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -212,11 +227,20 @@ public class GererReclamation extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+       
+     
+        
+      
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GererReclamation().setVisible(true);
+               
             }
         });
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

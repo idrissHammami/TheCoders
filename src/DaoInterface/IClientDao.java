@@ -8,6 +8,7 @@ package DaoInterface;
 
 import Entites.Client;
 import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -19,6 +20,6 @@ public interface IClientDao {
     public boolean updateClient(Client client);
     public boolean deleteClient(int id);
     public Client retrieveClientById(int id);
-    public List<Client> retrieveAllClient();
+    public Vector<Client> retrieveAllClient();
     
 }
