@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -128,8 +129,8 @@ String requete="DELETE FROM utilisateur where id=? And nature=1";
         }
         }
     @Override
-    public List<Client> retrieveAllClient() {
-     List<Client> listclient =new ArrayList<>();
+    public Vector<Client> retrieveAllClient() {
+     Vector<Client> listclient =new Vector<>();
         String requete ="select * from utilisateur where nature=1";
         try{
             Statement statement= connexion.createStatement();
