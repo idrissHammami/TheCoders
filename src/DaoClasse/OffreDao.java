@@ -7,6 +7,7 @@ package DaoClasse;
 
 import DaoInterface.IOffreDao;
 import Entites.Offre;
+import Entites.Utilisateur;
 import Technique.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,8 +35,10 @@ public class OffreDao implements IOffreDao{
             pst.setString(1, offre.getTitre());
             pst.setFloat(2, offre.getPrix());
             pst.setString(3, offre.getDescription());
-            pst.setString(4, offre.getDate_debut());
-            pst.setString(5, offre.getDate_fin());
+            java.sql.Date d1=new java.sql.Date(offre.getDate_debut().getTime());
+            java.sql.Date d2=new java.sql.Date(offre.getDate_fin().getTime());
+            pst.setDate(4, d1);
+            pst.setDate(5, d2);
             pst.executeUpdate();
             System.out.println("insertion effectuer avec succes");
         } catch (SQLException ex) {
@@ -58,8 +61,10 @@ public class OffreDao implements IOffreDao{
             pst.setString(1, offre.getTitre());
             pst.setFloat(2, offre.getPrix());
             pst.setString(3, offre.getDescription());
-            pst.setString(4, offre.getDate_debut());
-            pst.setString(5, offre.getDate_fin());
+            java.sql.Date d1=new java.sql.Date(offre.getDate_debut().getTime());
+            java.sql.Date d2=new java.sql.Date(offre.getDate_fin().getTime());
+            pst.setDate(4, d1);
+            pst.setDate(5, d2);
             pst.executeUpdate();
             System.out.println("Mise à jour effectuer avec succes");
             
@@ -87,12 +92,14 @@ public class OffreDao implements IOffreDao{
     @Override
     public Offre retrievOffreById(int id) {
         Offre offre = new Offre();
+        Utilisateur u=new Utilisateur();
         try {
             ResultSet result = this.connexion.createStatement(
             ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM offre WHERE id="+id);
-            if(result.first())
-            offre = new Offre(id, result.getString(2), result.getFloat(3), result.getString(4), result.getString(5), result.getString(6));
+            //if(result.first())
+                
+          //  offre = new Offre(id, result.getString(2), result.getFloat(3), result.getString(4), result.getDate(5), result.getDate(6),);
                        
         } catch (SQLException ex) {
             Logger.getLogger(OffreDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,8 +121,8 @@ public class OffreDao implements IOffreDao{
                 offre.setTitre(resultat.getString(2));
                 offre.setPrix(resultat.getFloat(3));
                 offre.setDescription(resultat.getString(4));
-                offre.setDate_debut(resultat.getString(5));
-                offre.setDate_fin(resultat.getString(6));
+                offre.setDate_debut(resultat.getDate(5));
+                offre.setDate_fin(resultat.getDate(6));
                 L.add(offre);
             
                 System.out.println("Affichage en cours");
