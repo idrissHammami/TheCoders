@@ -6,6 +6,10 @@
 
 package GUI;
 
+import DaoClasse.PrestataireDao;
+import DaoInterface.IPrestataireDao;
+import Entites.Prestataire;
+
 /**
  *
  * @author Seif
@@ -44,8 +48,6 @@ public class AfficheDetailPrestataire extends javax.swing.JFrame {
         jTextPane4 = new javax.swing.JTextPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextPane5 = new javax.swing.JTextPane();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextPane6 = new javax.swing.JTextPane();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTextPane7 = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
@@ -54,6 +56,7 @@ public class AfficheDetailPrestataire extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,19 +77,24 @@ public class AfficheDetailPrestataire extends javax.swing.JFrame {
 
         jLabel9.setText("Nom");
 
+        jTextPane1.setName(""); // NOI18N
         jScrollPane1.setViewportView(jTextPane1);
 
+        jTextPane2.setName("nomText"); // NOI18N
         jScrollPane2.setViewportView(jTextPane2);
 
         jScrollPane4.setViewportView(jTextPane4);
 
         jScrollPane5.setViewportView(jTextPane5);
 
-        jScrollPane6.setViewportView(jTextPane6);
-
         jScrollPane7.setViewportView(jTextPane7);
 
         jButton1.setText("Modifier");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Quitter");
 
@@ -112,13 +120,13 @@ public class AfficheDetailPrestataire extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel5))
                 .addGap(51, 51, 51)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(jPasswordField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
@@ -152,7 +160,7 @@ public class AfficheDetailPrestataire extends javax.swing.JFrame {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(19, 19, 19)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,10 +172,10 @@ public class AfficheDetailPrestataire extends javax.swing.JFrame {
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
@@ -200,6 +208,24 @@ public class AfficheDetailPrestataire extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Prestataire prest = new Prestataire();
+        IPrestataireDao iPrest = new PrestataireDao();
+        
+        prest.setNom(jTextPane1.getText());
+        prest.setMail(jTextPane4.getText());
+        prest.setAdresse(jTextPane2.getText());
+        prest.setTel(Integer.parseInt(jTextPane5.getText()));
+        prest.setPassword(jPasswordField1.getPassword().toString());
+        
+        prest.setMatriculeFiscale(jTextPane1.getText());
+        prest.setDescription(jTextArea1.getText());
+        prest.setId(5);
+        iPrest.updatePrestataire(prest);
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,19 +275,18 @@ public class AfficheDetailPrestataire extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
     private javax.swing.JTextPane jTextPane4;
     private javax.swing.JTextPane jTextPane5;
-    private javax.swing.JTextPane jTextPane6;
     private javax.swing.JTextPane jTextPane7;
     // End of variables declaration//GEN-END:variables
 }

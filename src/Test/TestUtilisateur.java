@@ -28,13 +28,13 @@ public class TestUtilisateur {
           Prestataire p2    =new Prestataire("#1111555", " salon de thé ", 6, 23221155, 0, "Rizzocafé", "route de hammamet, mrezgua ", "rizzo@gmail.Com", "224455");
         //ic.insertClient(c2);
         //ic.updateClient(c1);
-    //ic.deleteClient(2);
+    //ic.deleteClient(4);
      
-      /*   List<Client> cl = ic.retrieveAllClient();  
+         List<Client> cl = ic.retrieveAllClient();  
       for(Client c :cl){
          System.out.println(c);
       }
-      */
+      
       //    System.out.println(ic.retrieveClientById(4));
           //ip.insertPrestataire(p1);
          // ip.insertPrestataire(p2);
@@ -44,6 +44,6 @@ public class TestUtilisateur {
       for(Prestataire p :pr){
          System.out.println(p);
       }*/
-     System.out.println(ip.retrievePrestataireById(7));
+    // System.out.println(ip.retrievePrestataireById(7));
 }
 }
