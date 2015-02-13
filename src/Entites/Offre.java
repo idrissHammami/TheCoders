@@ -17,27 +17,12 @@ public class Offre {
     private String titre;
     private float prix;
     private String description;
-    private String date_debut;
-    private String date_fin;
+    private Date date_debut;
+    private Date date_fin;
+    private Utilisateur prestataire;
+   
     
     public Offre(){}
-
-    public Offre(String titre, float prix, String description, String date_debut, String date_fin) {
-        this.titre = titre;
-        this.prix = prix;
-        this.description = description;
-        this.date_debut = date_debut;
-        this.date_fin = date_fin;
-    }
-
-    public Offre(int id, String titre, float prix, String description, String date_debut, String date_fin) {
-        this.id = id;
-        this.titre = titre;
-        this.prix = prix;
-        this.description = description;
-        this.date_debut = date_debut;
-        this.date_fin = date_fin;
-    }
 
     public int getId() {
         return id;
@@ -71,28 +56,51 @@ public class Offre {
         this.description = description;
     }
 
-    public String getDate_debut() {
+    public Date getDate_debut() {
         return date_debut;
     }
 
-    public void setDate_debut(String date_debut) {
+    public void setDate_debut(Date date_debut) {
         this.date_debut = date_debut;
     }
 
-    public String getDate_fin() {
+    public Date getDate_fin() {
         return date_fin;
     }
 
-    public void setDate_fin(String date_fin) {
+    public void setDate_fin(Date date_fin) {
         this.date_fin = date_fin;
     }
 
-    @Override
-    public String toString() {
-        return "Offre{" + "id=" + id + ", titre=" + titre + ", prix=" + prix + ", description=" + description + ", date_debut=" + date_debut + ", date_fin=" + date_fin + '}';
+    public Utilisateur getPrestataire() {
+        return prestataire;
     }
 
-    @Override
+    public void setPrestataire(Utilisateur prestataire) {
+        this.prestataire = prestataire;
+    }
+    
+
+    public Offre(String titre, float prix, String description, Date date_debut, Date date_fin, Utilisateur prestataire) {
+        this.titre = titre;
+        this.prix = prix;
+        this.description = description;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+    }
+
+    public Offre(int id, String titre, float prix, String description, Date date_debut, Date date_fin, Utilisateur prestataire) {
+        this.id = id;
+        this.titre = titre;
+        this.prix = prix;
+        this.description = description;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+    }
+
+   
+    
+    
     public int hashCode() {
         int hash = 3;
         hash = 67 * hash + this.id;
