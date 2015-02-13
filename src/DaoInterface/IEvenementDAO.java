@@ -24,5 +24,5 @@ public interface IEvenementDAO {
     public Evenement retrievEvenementById(int id);
     public List<Evenement> DisplayAllEvent();
     
-    
+     public List<Evenement> retrievEvenementByName(String nom);
 }

@@ -18,13 +18,15 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableModelEvenement extends AbstractTableModel{
 
+
         String[] titres = {"Id","Titre","Lieu","date_debut","date_fin","confidentialite"
                 ,"description","prix","createur"};
         List<Evenement> evenements = new ArrayList<>();
         
-        public TableModelEvenement (){
+        public TableModelEvenement (String titre){
             IEvenementDAO eventDAO = new EvenementDAO();
-            evenements=eventDAO.DisplayAllEvent();        
+          //  evenements=eventDAO.DisplayAllEvent();
+            evenements=eventDAO.retrievEvenementByName(titre);
         }
         
         @Override

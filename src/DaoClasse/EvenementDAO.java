@@ -143,6 +143,40 @@ public class EvenementDAO implements IEvenementDAO{
         }
         
     }
+
+  
+
+    @Override
+    public List<Evenement> retrievEvenementByName(String titre) {
+       List<Evenement> listeEvenements = new ArrayList<>();
+        String requete = "SELECT * FROM evenement where titre like '%"+titre+"%'";
+        
+        try {
+            Statement statement = connexion.createStatement();
+            ResultSet resultat = statement.executeQuery(requete);
+            while (resultat.next()) {   
+                
+                Evenement event = new Evenement();
+                event.setId_event(resultat.getInt(1));
+                event.setNom_event(resultat.getString(2));
+                event.setLieu_event(resultat.getString(3));
+                event.setDate_debut_event(resultat.getString(4));
+                event.setDate_fin_event(resultat.getString(5) );
+                event.setConfidentialite_event(resultat.getInt(6));
+                event.setDescription_event(resultat.getString(7));
+                event.setPrix_event(resultat.getFloat(8));
+                
+               
+                listeEvenements.add(event);
+                System.out.println("Affichage en cours tt");
+            }
+            return  listeEvenements;
+        } catch (SQLException ex) {
+            Logger.getLogger(EvenementDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erreur lors du chargement des Evenements");
+            return null;
+        }
+        }
     
     
 }
