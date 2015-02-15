@@ -36,6 +36,16 @@ public class Evenement {
         this.description_event = description_event;
         this.confidentialite_event = confidentialite_event;
     }
+
+    public Evenement(String nom_event, String lieu_event, String date_debut_event, String date_fin_event, float prix_event, String description_event, int confidentialite_event) {
+        this.nom_event = nom_event;
+        this.lieu_event = lieu_event;
+        this.date_debut_event = date_debut_event;
+        this.date_fin_event = date_fin_event;
+        this.prix_event = prix_event;
+        this.description_event = description_event;
+        this.confidentialite_event = confidentialite_event;
+    }
     
     
      public Evenement() {
