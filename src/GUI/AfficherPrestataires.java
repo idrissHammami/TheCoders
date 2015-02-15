@@ -6,11 +6,8 @@
 
 package GUI;
 
-import DaoClasse.ClientDao;
 import DaoClasse.PrestataireDao;
-import DaoInterface.IClientDao;
 import DaoInterface.IPrestataireDao;
-import Entites.Client;
 import Entites.Prestataire;
 import java.util.List;
 import java.util.Vector;
@@ -19,31 +16,29 @@ import java.util.Vector;
  *
  * @author Seif
  */
-public class AfficherClients extends javax.swing.JFrame {
-    IClientDao c = new ClientDao();
-    List<Client> arr = c.retrieveAllClient();
+public class AfficherPrestataires extends javax.swing.JFrame {
+    
+    IPrestataireDao c = new PrestataireDao();
+    List<Prestataire> arr = c.retrieveAllPrestataire();
     public Vector<String> v = new Vector<String>();
    
     public Vector<String> afficheNom(List l)
     {
-        for(Client u : arr)
+        for(Prestataire u : arr)
         {
-            v.add(u.getId()+ " " + u.getPrenom()+" " + u.getNom());
+            v.add(u.getId() +" " + u.getNom() + " " + u.getMatriculeFiscale());
         }
         return v;
     }
      Vector<String> v1 =afficheNom(arr);
-    /**
-     * Creates new form AfficherClients
-     */
-    public AfficherClients() {
-        
-        initComponents();
-      
-        jList1.setListData(v1);
-       
-       
  
+
+    /**
+     * Creates new form AfficherPrestataires
+     */
+    public AfficherPrestataires() {
+        initComponents();
+             jList1.setListData(v1);
     }
 
     /**
@@ -68,7 +63,7 @@ public class AfficherClients extends javax.swing.JFrame {
         jInternalFrame1.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Liste des Clients");
+        jLabel1.setText("Liste des Prestataires");
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -114,14 +109,13 @@ public class AfficherClients extends javax.swing.JFrame {
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel1))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(71, 71, 71)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(176, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(240, 240, 240))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +126,7 @@ public class AfficherClients extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,20 +168,20 @@ public class AfficherClients extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AfficherClients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AfficherPrestataires.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AfficherClients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AfficherPrestataires.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AfficherClients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AfficherPrestataires.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AfficherClients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AfficherPrestataires.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AfficherClients().setVisible(true);
+                new AfficherPrestataires().setVisible(true);
             }
         });
     }
@@ -199,7 +193,6 @@ public class AfficherClients extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,8 +19,7 @@ import javax.swing.table.AbstractTableModel;
 public class TableModelEvenement extends AbstractTableModel{
 
 
-        String[] titres = {"Id","Titre","Lieu","date_debut","date_fin","confidentialite"
-                ,"description","prix","createur"};
+        String[] titres = {"Id","Titre","Lieu","date_debut","date_fin"};
         List<Evenement> evenements = new ArrayList<>();
         
         public TableModelEvenement (String titre){
@@ -50,9 +49,7 @@ public class TableModelEvenement extends AbstractTableModel{
                case 2 : return evenements.get(rowIndex).getLieu_event();
                    case 3 : return evenements.get(rowIndex).getDate_debut_event();
                        case 4 : return evenements.get(rowIndex).getDate_fin_event();
-                           case 5 : return evenements.get(rowIndex).getConfidentialite_event();
-                               case 6 : return evenements.get(rowIndex).getDescription_event();
-                                    case 7 : return evenements.get(rowIndex).getPrix_event();
+                       
             default:
                return null;      
         
