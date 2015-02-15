@@ -18,4 +18,5 @@ public interface IUtilisateurDao {
     public boolean deleteUtilisateur(int id);
     public Utilisateur retrieveUtilisateurById(int id);
     public List<Utilisateur> retrieveAllUtilisateur();
+  
 }
