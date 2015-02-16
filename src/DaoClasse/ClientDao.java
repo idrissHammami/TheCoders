@@ -129,8 +129,8 @@ String requete="DELETE FROM utilisateur where id=? And nature=1";
         }
         }
     @Override
-    public Vector<Client> retrieveAllClient() {
-     Vector<Client> listclient =new Vector<>();
+    public List<Client> retrieveAllClient() {
+     List<Client> listclient =new ArrayList<Client>() ;
         String requete ="select * from utilisateur where nature=1";
         try{
             Statement statement= connexion.createStatement();

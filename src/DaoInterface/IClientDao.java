@@ -20,6 +20,6 @@ public interface IClientDao {
     public boolean updateClient(Client client);
     public boolean deleteClient(int id);
     public Client retrieveClientById(int id);
-    public Vector<Client> retrieveAllClient();
+    public List<Client> retrieveAllClient();
     
 }
