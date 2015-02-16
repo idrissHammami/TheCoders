@@ -6,9 +6,26 @@
 package GUI;
 
 import DaoClasse.EvenementDAO;
+import DaoClasse.PrestataireDao;
+import DaoClasse.UtilisateurDao;
 import DaoInterface.IEvenementDAO;
+import DaoInterface.IPrestataireDao;
+import DaoInterface.IUtilisateurDao;
 import Entites.Evenement;
+import Entites.Prestataire;
+import Entites.Utilisateur;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -21,9 +38,21 @@ public class CreeEvenement extends javax.swing.JFrame {
      */
         Evenement event ;
         IEvenementDAO eventDAO = new EvenementDAO();
+        IPrestataireDao presDAO = new PrestataireDao();
+        List<Prestataire> prestataires = new ArrayList<>();
+
         
     public CreeEvenement() {
            initComponents();
+          
+       prestataires = presDAO.retrieveAllPrestataire();
+       EvenementDAO eventDAO = new EvenementDAO();
+       
+       
+        for (Prestataire prestataire : prestataires) {
+            jComboBox1.addItem(prestataire.getNom());
+        }
+        
            
     }
 
@@ -36,6 +65,7 @@ public class CreeEvenement extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -47,7 +77,7 @@ public class CreeEvenement extends javax.swing.JFrame {
         description = new javax.swing.JTextArea();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField5 = new javax.swing.JTextField();
+        type = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         prix = new javax.swing.JTextField();
@@ -56,8 +86,8 @@ public class CreeEvenement extends javax.swing.JFrame {
         dateDebut = new javax.swing.JTextField();
         dateFin = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        publicRadioButton = new javax.swing.JRadioButton();
+        priveRadioButton = new javax.swing.JRadioButton();
         ajouterButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,13 +117,13 @@ public class CreeEvenement extends javax.swing.JFrame {
         jRadioButton2.setText("Payant");
         jRadioButton2.setName("payant"); // NOI18N
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        type.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                typeActionPerformed(evt);
             }
         });
 
-        jLabel12.setText("Nombre des tickets");
+        jLabel12.setText("Type de l'évenement");
 
         jLabel5.setText("prix");
 
@@ -109,11 +139,21 @@ public class CreeEvenement extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prestataire 1", "Prestataire 2", "Prestataire 3", "Prestataire 4" }));
+        dateDebut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateDebutActionPerformed(evt);
+            }
+        });
 
-        jRadioButton3.setText("Public");
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jRadioButton4.setText("Prive");
+        publicRadioButton.setText("Public");
+
+        priveRadioButton.setText("Prive");
 
         ajouterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo-bravo-bleu1.png"))); // NOI18N
         ajouterButton.setText("Publier Votre Evenement");
@@ -136,20 +176,22 @@ public class CreeEvenement extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel11)))
+                            .addComponent(jLabel11))
+                        .addGap(26, 26, 26))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane3)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5)
+                            .addComponent(type)
                             .addComponent(prix)
                             .addComponent(name)
                             .addComponent(adresse)
@@ -161,14 +203,14 @@ public class CreeEvenement extends javax.swing.JFrame {
                         .addComponent(jRadioButton1)
                         .addGap(40, 40, 40)
                         .addComponent(jRadioButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                        .addComponent(jRadioButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addComponent(publicRadioButton)
                         .addGap(36, 36, 36)
-                        .addComponent(jRadioButton4)
+                        .addComponent(priveRadioButton)
                         .addGap(44, 44, 44))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ajouterButton)
+                .addComponent(ajouterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(147, 147, 147))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -205,19 +247,19 @@ public class CreeEvenement extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4))
+                    .addComponent(publicRadioButton)
+                    .addComponent(priveRadioButton))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(prix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(ajouterButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(178, 178, 178)
@@ -245,9 +287,9 @@ public class CreeEvenement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_typeActionPerformed
 
     private void prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prixActionPerformed
         // TODO add your handling code here:
@@ -258,18 +300,39 @@ public class CreeEvenement extends javax.swing.JFrame {
     }//GEN-LAST:event_nameActionPerformed
 
     private void ajouterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterButtonActionPerformed
-        // TODO add your handling code here:
-        
-       
-        
-        event = new Evenement(name.getText(), adresse.getText(), dateDebut.getText(), dateFin.getText(), 
-                Float.parseFloat(prix.getText()), description.getText(),0 );
-        
-        eventDAO.insertEvenement(event);
+            try {
+                // TODO add your handling code here:
+                String debut = dateDebut.getText();
+                String fin = dateFin.getText();
+                DateFormat format = new SimpleDateFormat("DD-MM-YYYY", Locale.ENGLISH);
+                Date datedebut = format.parse(debut);
+                Date datefin = format.parse(fin);
+                String nomPrestataires;
+                nomPrestataires = String.valueOf(jComboBox1.getSelectedItem());
+                
+                event = new Evenement(name.getText(), adresse.getText(), datedebut, datefin,"",description.getText() ,
+                        Float.parseFloat(prix.getText()),(Utilisateur)presDAO.retrievePrestataireByName(nomPrestataires), debut);
+                
+                eventDAO.insertEvenement(event);
+            } catch (ParseException ex) {
+                Logger.getLogger(CreeEvenement.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         
         
     }//GEN-LAST:event_ajouterButtonActionPerformed
+
+    private void dateDebutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateDebutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateDebutActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+       
+        
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +372,7 @@ public class CreeEvenement extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adresse;
     private javax.swing.JButton ajouterButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField dateDebut;
     private javax.swing.JTextField dateFin;
     private javax.swing.JTextArea description;
@@ -324,11 +388,11 @@ public class CreeEvenement extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField name;
+    private javax.swing.JRadioButton priveRadioButton;
     private javax.swing.JTextField prix;
+    private javax.swing.JRadioButton publicRadioButton;
+    private javax.swing.JTextField type;
     // End of variables declaration//GEN-END:variables
 }

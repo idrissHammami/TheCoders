@@ -14,9 +14,11 @@ import java.util.List;
  * @author Seif
  */
 public interface IPrestataireDao {
-        public boolean insertPrestataire(Prestataire prestataire);
+    
+    public boolean insertPrestataire(Prestataire prestataire);
     public boolean updatePrestataire(Prestataire prestataire);
     public boolean deletePrestataire(int id);
     public Prestataire retrievePrestataireById(int id);
     public List<Prestataire> retrieveAllPrestataire();
+    public Prestataire retrievePrestataireByName(String titre);
 }

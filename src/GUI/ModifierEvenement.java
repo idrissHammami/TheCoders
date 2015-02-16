@@ -8,6 +8,7 @@ package GUI;
 import DaoClasse.EvenementDAO;
 import DaoInterface.IEvenementDAO;
 import Entites.Evenement;
+import java.sql.Date;
 
 /**
  *
@@ -27,10 +28,11 @@ public class ModifierEvenement extends javax.swing.JFrame {
         event = eventDAO.retrievEvenementById(id);
         name.setText(event.getNom_event());
         adresse.setText(event.getLieu_event());
-        dateDebut.setText(event.getDate_debut_event());
-        dateFin.setText(event.getDate_fin_event());
+        dateDebut.setText(String.valueOf(event.getDate_debut_event()));
+        dateFin.setText(String.valueOf(event.getDate_fin_event()));
         description.setText(event.getDescription_event());
-        prix.setText(String.valueOf(event.getPrix_event()) );
+        prix.setText(String.valueOf(event.getPrix_event()));
+        type.setText(event.getType_event());
         
     }
 
@@ -63,9 +65,11 @@ public class ModifierEvenement extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        nombreTicket = new javax.swing.JTextField();
+        type = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         ModifierButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,7 +119,7 @@ public class ModifierEvenement extends javax.swing.JFrame {
 
         jLabel6.setText("Prestataire");
 
-        jLabel7.setText("Nombre des tickets");
+        jLabel7.setText("Type d'évenement");
 
         jLabel8.setText("Prix /Ticket");
 
@@ -126,6 +130,13 @@ public class ModifierEvenement extends javax.swing.JFrame {
                 ModifierButtonActionPerformed(evt);
             }
         });
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,9 +178,10 @@ public class ModifierEvenement extends javax.swing.JFrame {
                     .addComponent(name)
                     .addComponent(adresse)
                     .addComponent(dateDebut, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombreTicket, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(type, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(prix, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(90, 90, 90))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(121, 121, 121)
                 .addComponent(ModifierButton)
@@ -203,17 +215,19 @@ public class ModifierEvenement extends javax.swing.JFrame {
                     .addComponent(PrestatairesList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prive)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(prive)
+                        .addComponent(jRadioButton2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(nombreTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,12 +274,16 @@ public class ModifierEvenement extends javax.swing.JFrame {
         
         event.setNom_event(name.getText());
         event.setLieu_event(adresse.getText());
-        event.setDate_debut_event(dateDebut.getText());
-        event.setDate_fin_event(dateFin.getText());
+        event.setDate_debut_event(Date.valueOf(dateDebut.getText()));
+        event.setDate_fin_event(Date.valueOf(dateFin.getText()));
         event.setDescription_event(description.getText());
-        event.setConfidentialite_event(DO_NOTHING_ON_CLOSE);
+        event.setConfidentialite_event("");
         event.setPrix_event(Float.parseFloat(prix.getText()));
+        event.setType_event(type.getText());
+        
+        
         eventDAO.updateEvenement(event);
+        
         
         
     }//GEN-LAST:event_ModifierButtonActionPerformed
@@ -320,14 +338,16 @@ public class ModifierEvenement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField name;
-    private javax.swing.JTextField nombreTicket;
     private javax.swing.JRadioButton prive;
     private javax.swing.JTextField prix;
+    private javax.swing.JTextField type;
     // End of variables declaration//GEN-END:variables
 }

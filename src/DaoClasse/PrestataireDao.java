@@ -7,7 +7,9 @@
 package DaoClasse;
 
 import DaoInterface.IPrestataireDao;
+import Entites.Evenement;
 import Entites.Prestataire;
+import Entites.Utilisateur;
 import Technique.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -135,6 +137,7 @@ String requete="DELETE FROM utilisateur where id=? AND nature=0";
             while (resultat.next())
             {
                 Prestataire ps = new Prestataire();
+                
                 ps.setId(resultat.getInt(1));
                ps.setNom(resultat.getString(2));
                ps.setAdresse(resultat.getString(3));
@@ -157,4 +160,58 @@ String requete="DELETE FROM utilisateur where id=? AND nature=0";
             return null;
         }
     
-}}
+}
+    public Prestataire retrievEvenementByName(String titre) {
+        String requete = "SELECT * FROM utilisateur where titre ="+titre;
+                 Prestataire ps = new Prestataire();
+        try {
+            Statement statement = connexion.createStatement();
+            ResultSet resultat = statement.executeQuery(requete);
+            while (resultat.next()) { 
+               ps.setId(resultat.getInt(1));
+               ps.setNom(resultat.getString(2));
+               ps.setAdresse(resultat.getString(3));
+               ps.setMail(resultat.getString(4));
+               ps.setTel(resultat.getInt(5));
+               ps.setPassword(resultat.getString(7));
+               ps.setMatriculeFiscale(resultat.getString(11));
+               ps.setDescription(resultat.getString(12));
+               ps.setNature(resultat.getByte(13));
+               System.out.println("récupération du prestataire en cours..");
+            }
+            return  ps;
+        } catch (SQLException ex) {
+            Logger.getLogger(EvenementDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erreur lors du chargement du prestataire :( ");
+            return null;
+        }
+        }
+
+    @Override
+    public Prestataire retrievePrestataireByName(String titre) {
+                 String requete = "SELECT * FROM utilisateur where titre ="+titre;
+                 Prestataire ps = new Prestataire();
+        try {
+            Statement statement = connexion.createStatement();
+            ResultSet resultat = statement.executeQuery(requete);
+            while (resultat.next()) { 
+               ps.setId(resultat.getInt(1));
+               ps.setNom(resultat.getString(2));
+               ps.setAdresse(resultat.getString(3));
+               ps.setMail(resultat.getString(4));
+               ps.setTel(resultat.getInt(5));
+               ps.setPassword(resultat.getString(7));
+               ps.setMatriculeFiscale(resultat.getString(11));
+               ps.setDescription(resultat.getString(12));
+               ps.setNature(resultat.getByte(13));
+               System.out.println("Affichage en cours tt");
+            }
+            return  ps;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EvenementDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erreur lors du chargement des Evenements");
+            return null;
+        }    }
+    
+}

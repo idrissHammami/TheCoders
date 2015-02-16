@@ -20,15 +20,10 @@ public class GererReclamation extends javax.swing.JFrame {
      * Creates new form GererReclamation
      */
      IReclamationDao iRec = new ReclamationDao();
- Vector<Reclamation> arr = iRec.retrieveAllReclamation();
-    public GererReclamation() {
+     Vector<Reclamation> arr = iRec.retrieveAllReclamation();
+     public GererReclamation() {
         initComponents();
-           
-        
-         
-    
-           jList1.setListData(arr);
- 
+           jList1.setListData(arr); 
     }
     
     
