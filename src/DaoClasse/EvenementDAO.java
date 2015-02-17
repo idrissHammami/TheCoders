@@ -8,7 +8,6 @@ package DaoClasse;
 import Technique.MyConnection;
 import DaoInterface.IEvenementDAO;
 import Entites.Evenement;
-import DaoClasse.EvenementDAO;
 import Entites.Utilisateur;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,7 +47,7 @@ public class EvenementDAO implements IEvenementDAO{
             pst.setString(5,evenement.getConfidentialite_event());
             pst.setString(6,evenement.getDescription_event());
             pst.setFloat(7,evenement.getPrix_event());
-            pst.setObject(8,evenement.getUser());
+            pst.setInt(8,evenement.getUser().getId());
             pst.setString(9,evenement.getType_event());
             pst.executeUpdate();
               }
@@ -79,7 +78,7 @@ public class EvenementDAO implements IEvenementDAO{
             pst.setString(5,evenement.getConfidentialite_event());
             pst.setString(6,evenement.getDescription_event());
             pst.setFloat(7,evenement.getPrix_event());
-            pst.setObject(8,evenement.getUser());
+            pst.setInt(8,evenement.getUser().getId());
             pst.setString(9,evenement.getType_event());
             pst.executeUpdate();
             
@@ -145,7 +144,9 @@ public class EvenementDAO implements IEvenementDAO{
                 event.setConfidentialite_event(resultat.getString(6));
                  event.setDescription_event(resultat.getString(7));
                 event.setPrix_event(resultat.getFloat(8));
-                event.setUser((Utilisateur)resultat.getObject(9));
+                Utilisateur u = new Utilisateur();
+                u.setId(resultat.getInt(9));
+                event.setUser(u);
                 event.setType_event(resultat.getString(10));
                 
                
@@ -171,8 +172,7 @@ public class EvenementDAO implements IEvenementDAO{
         try {
             Statement statement = connexion.createStatement();
             ResultSet resultat = statement.executeQuery(requete);
-            while (resultat.next()) {   
-                
+             while (resultat.next()) {   
                 Evenement event = new Evenement();
                 event.setId_event(resultat.getInt(1));
                 event.setNom_event(resultat.getString(2));
@@ -182,7 +182,10 @@ public class EvenementDAO implements IEvenementDAO{
                 event.setConfidentialite_event(resultat.getString(6));
                 event.setDescription_event(resultat.getString(7));
                 event.setPrix_event(resultat.getFloat(8));
-                event.setUser((Utilisateur)resultat.getObject(9));
+                
+                Utilisateur u = new Utilisateur();
+                u.setId(resultat.getInt(9));
+                event.setUser(u);
                 event.setType_event(resultat.getString(10));
                
                 listeEvenements.add(event);
