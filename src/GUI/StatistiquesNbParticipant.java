@@ -30,5 +30,7 @@ graphe = ChartFactory.createPieChart3D("Top événements", dataset,true ,true ,f
         cp = new ChartPanel(graphe);
         this.add(cp);
     }
+
+   
 	 
 } 
