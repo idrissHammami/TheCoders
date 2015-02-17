@@ -9,10 +9,7 @@ import DaoClasse.ReclamationDao;
 import DaoInterface.IReclamationDao;
 import Entites.Offre;
 import Entites.Reclamation;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  *

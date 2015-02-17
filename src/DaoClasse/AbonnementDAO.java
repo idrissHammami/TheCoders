@@ -123,7 +123,7 @@ public class AbonnementDAO implements Igererabonnement {
     @Override
     public List<Abonnement> DisplayAllAbonnement() {
         List<Abonnement> listeAbonnement = new ArrayList<>();
-        String requete = "SELECT * FROM evenement";
+        String requete = "SELECT * FROM abonnement";
         UtilisateurDao x =new UtilisateurDao();
         
         try {

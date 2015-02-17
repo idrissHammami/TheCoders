@@ -17,6 +17,8 @@ public class AfficherAbonnements extends javax.swing.JFrame {
      */
     public AfficherAbonnements() {
         initComponents();
+              jTable1.setModel(new TableModelAbonnement());
+
     }
 
     /**
@@ -57,7 +59,7 @@ public class AfficherAbonnements extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
