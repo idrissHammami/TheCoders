@@ -5,6 +5,7 @@
  */
 package DaoClasse;
 
+import DaoInterface.IClientDao;
 import Technique.MyConnection;
 import DaoInterface.IEvenementDAO;
 import Entites.Evenement;
@@ -115,10 +116,14 @@ public class EvenementDAO implements IEvenementDAO{
         ResultSet result = this.connexion.createStatement(
         ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM evenement WHERE id = " + id);
-        if(result.first())
+        if(result.first()){
+            Utilisateur user = new Utilisateur();
+            IClientDao iCl= new ClientDao();
+            user.setId(result.getInt(9));
+            user = iCl.retrieveClientById(user.getId());
         event = new Evenement(id, result.getString(2), result.getString(3), 
-                result.getDate(4), result.getDate(5), result.getString(6), result.getString(7), result.getFloat(8), (Utilisateur)result.getObject(9), result.getString(10));
-        } catch (SQLException e) {
+                result.getDate(4), result.getDate(5), result.getString(6), result.getString(7), result.getFloat(8), user, result.getString(10));
+        }} catch (SQLException e) {
         System.out.println("erreur"+ e.getMessage());
         }
         return event;

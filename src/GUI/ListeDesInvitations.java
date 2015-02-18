@@ -9,6 +9,7 @@ import DaoClasse.ParticipationDao;
 import DaoInterface.IParticipation;
 import Entites.Client;
 import Entites.Evenement;
+import Entites.Invitation;
 import java.util.Vector;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Vector;
 public class ListeDesInvitations extends javax.swing.JFrame {
    
     IParticipation iP = new ParticipationDao();
-        Vector<String> arr = new Vector<String>();
+        Vector<Invitation> arr = new Vector<Invitation>();
 
     /**
      * Creates new form ListeDesInvitations
@@ -27,6 +28,7 @@ public class ListeDesInvitations extends javax.swing.JFrame {
         initComponents();
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
+    
                 arr =  iP.retrieveAllInvitation();
 
                    jList1.setListData(arr);
@@ -79,8 +81,18 @@ public class ListeDesInvitations extends javax.swing.JFrame {
         });
 
         jButton2.setText("Refuser");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Quitter");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -110,7 +122,7 @@ public class ListeDesInvitations extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addGap(44, 44, 44)
                         .addComponent(jButton3)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,21 +173,28 @@ public class ListeDesInvitations extends javax.swing.JFrame {
     }//GEN-LAST:event_jList1ValueChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        Client c = new Client();
-        c.setId(5);
         
-        Evenement e =new Evenement();
-        e.setId_event(4);
-        IParticipation iPar = new ParticipationDao();
-        iPar.accepterInvitation(c, e);
-                        
+       Invitation inv = new Invitation();
+       inv = arr.get(jList1.getSelectedIndex());
+        iP.accepterInvitation(inv.getClient(), inv.getEvent(),"accepté");
         arr =  iP.retrieveAllInvitation();
-
         jList1.setListData(arr);
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+Invitation inv = new Invitation();
+       inv = arr.get(jList1.getSelectedIndex());
+        iP.accepterInvitation(inv.getClient(), inv.getEvent(),"refusé");
+        arr =  iP.retrieveAllInvitation();
+        jList1.setListData(arr);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

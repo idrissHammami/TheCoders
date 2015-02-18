@@ -7,12 +7,7 @@ package GUI;
 
 import DaoClasse.UtilisateurDao;
 import Entites.Utilisateur;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import javax.swing.JInternalFrame;
-import javax.swing.SwingWorker;
-import sun.awt.WindowClosingListener;
 
 /**
  *

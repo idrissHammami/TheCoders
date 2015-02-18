@@ -7,6 +7,7 @@ package DaoInterface;
 
 import Entites.Client;
 import Entites.Evenement;
+import Entites.Invitation;
 import Entites.Reclamation;
 import java.util.Vector;
 
@@ -17,8 +18,8 @@ import java.util.Vector;
 public interface IParticipation {
        //idriss
     public boolean participerEvenement(Client c, Evenement e);
-    public boolean accepterInvitation(Client c,Evenement e);
-        public Vector<String> retrieveAllInvitation();
+    public boolean accepterInvitation(Client c,Evenement e, String ch);
+        public Vector<Invitation> retrieveAllInvitation();
 
     
 }

@@ -5,9 +5,12 @@
  */
 package DaoClasse;
 
+import DaoInterface.IClientDao;
+import DaoInterface.IEvenementDAO;
 import DaoInterface.IParticipation;
 import Entites.Client;
 import Entites.Evenement;
+import Entites.Invitation;
 import Technique.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,6 +27,8 @@ import java.util.logging.Logger;
  */
 public class ParticipationDao  implements IParticipation{
             Connection connexion= MyConnection.getInstance();
+            IClientDao iCl = new ClientDao();
+            IEvenementDAO iVent = new EvenementDAO();
 
     
     @Override
@@ -50,13 +55,15 @@ public class ParticipationDao  implements IParticipation{
 
 
     @Override
-    public boolean accepterInvitation(Client c, Evenement e) {
+    public boolean accepterInvitation(Client c, Evenement e, String ch) {
 
-String requete="UPDATE invitation set etat='accepté' where evenement=? and participant=?";
+String requete="UPDATE invitation set etat=? where evenement=? and participant=?";
         try{
         PreparedStatement pst = connexion.prepareStatement(requete);
-        pst.setInt(2,c.getId());
-        pst.setInt(1,e.getId_event());
+        pst.setString(1, ch);
+        pst.setInt(2,e.getId_event());
+                pst.setInt(3,c.getId());
+
         pst.executeUpdate();
             System.out.println("Mise a jour effectuee avec succes");
         }
@@ -66,20 +73,34 @@ String requete="UPDATE invitation set etat='accepté' where evenement=? and part
         }     
                 return true;    }
 
-    @Override
-    public Vector<String> retrieveAllInvitation() {
-        Vector<String> listRec =new Vector<String>();
-        String requete ="select e.titre,i.date_invitation,i.etat from invitation i, evenement e,utilisateur u where i.evenement=e.id and i.participant=u.id";
+    public Vector<Invitation> retrieveAllInvitation() {
+        Vector<Invitation> listRec =new Vector<Invitation>();
+        String requete ="select * from invitation i, evenement e,utilisateur u where i.evenement=e.id and i.participant=u.id";
         try{
             Statement statement= connexion.createStatement();
             ResultSet resultat = statement.executeQuery(requete);
             while (resultat.next())
             {
-                String ch = resultat.getString(1)+"    "+resultat.getDate(2)+"     "+resultat.getString(3);
-              
+                Invitation invitation = new Invitation();
+                
+                Client cl = new Client();
+                cl.setId(resultat.getInt("participant"));
+                cl  =  iCl.retrieveClientById(cl.getId());
+                
+                
+                Evenement event = new Evenement();
+                event.setId_event(resultat.getInt("evenement"));
+                event = iVent.retrievEvenementById(event.getId_event());
+                
+                invitation.setClient(cl);
+                invitation.setEvent(event);
+                
+                      
+          invitation.setEtat( resultat.getString("etat"));
+          invitation.setDateInvitation(resultat.getDate("date_invitation"));
 
                 
-                listRec.add(ch);
+                listRec.add(invitation);
             }
             return listRec;
             
@@ -89,5 +110,6 @@ String requete="UPDATE invitation set etat='accepté' where evenement=? and part
         }
     
     }
+
     
 }
