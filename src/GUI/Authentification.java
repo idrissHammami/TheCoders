@@ -11,7 +11,12 @@ import DaoClasse.UtilisateurDao;
 import Entites.Admin;
 import Entites.Prestataire;
 import Entites.Utilisateur;
+import jaco.mp3.player.MP3Player;
+import java.io.File;
+import java.io.InputStream;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +29,7 @@ public class Authentification extends javax.swing.JFrame {
      */
     public Authentification() {
         initComponents();
+        
     }
 
     /**
@@ -161,14 +167,16 @@ public class Authentification extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void validerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerButtonActionPerformed
+      
+       
+       
        UtilisateurDao ud =new UtilisateurDao();
        List<Utilisateur> utlisateurs = ud.retrieveAllUtilisateur();
        AdminDao adminDAO = new AdminDao();
        List<Admin> administrateurs = adminDAO.retriveAllAdmin();
        PrestataireDao presDAO = new PrestataireDao();
        List<Prestataire> prestataires = presDAO.retrieveAllPrestataire();
-       
-       
+              
        for(Utilisateur e: utlisateurs) {
           if((e.getMail().equals(login.getText())) && (e.getPassword().equals(password.getText())))
           { 
@@ -176,12 +184,11 @@ public class Authentification extends javax.swing.JFrame {
               new AcceuilClient().setVisible(true);
           }   
           } //endfor
-       for (Admin administrateur : administrateurs) {
+       for(Admin administrateur : administrateurs) {
            if((administrateur.getMail().equals(login.getText())) && (administrateur.getPwd().equals(password.getText())))
           { 
               new AcceuilAdmin().setVisible(true);
               System.out.println("Authentification réussite");
-            
           } 
          }
         for (Prestataire prestataire : prestataires) {
@@ -240,6 +247,14 @@ public class Authentification extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                 InputStream in;
+        try {
+           File file1 = new File("C:\\sound.mp3");
+            new MP3Player(file1).play();
+          
+        } catch (Exception ex) {
+            Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 new Authentification().setVisible(true);
             }
         });

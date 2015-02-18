@@ -51,9 +51,6 @@ public class ClientDao implements IClientDao{
         System.out.println("insertion avec succée");
         return true; //To change body of generated methods, choose Tools | Templates.
     }
-
-
-
     @Override
     public boolean updateClient(Client client) {
 String requete="UPDATE utilisateur set nom=?, adresse=?, mail=?, tel=?,password=?,prenom=?,age=?,cin=? where id=?";
