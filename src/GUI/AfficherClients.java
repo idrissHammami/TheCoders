@@ -41,7 +41,7 @@ public class AfficherClients extends javax.swing.JFrame {
         initComponents();
       
         jList1.setListData(v1);
-       
+       Client i = new Client();
        
  
     }
