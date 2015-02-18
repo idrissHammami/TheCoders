@@ -6,6 +6,7 @@
 package DaoClasse;
 
 import DaoInterface.IOffreDao;
+import DaoInterface.IUtilisateurDao;
 import Entites.Offre;
 import Entites.Utilisateur;
 import Technique.MyConnection;
@@ -137,6 +138,186 @@ public class OffreDao implements IOffreDao{
         return null;
     }
 
+    public List<String> DisplayAllCategorie() {
+        List<String> L = new ArrayList<>();
+        String requete = "SELECT DISTINCT type FROM offre";
+        PreparedStatement pst;
+        try {
+            pst = connexion.prepareStatement(requete);
+            ResultSet resultat = pst.executeQuery(requete);
+            while (resultat.next()) { 
+               
+                L.add(resultat.getString(1));
+            
+                System.out.println("Affichage en cours");
+            }
+                return L;
+                
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OffreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
+    public Float getmax() {
+        String requete = "SELECT MAX(prix) FROM offre";
+        PreparedStatement pst;
+        try {
+            pst = connexion.prepareStatement(requete);
+            ResultSet resultat = pst.executeQuery(requete);
+           if (resultat.next())
+           { 
+               return resultat.getFloat(1);
+                
+           }
+           else
+           {
+               return 0F;
+           }
+               
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OffreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
+      public Float getmin() {
+        String requete = "SELECT MIN(prix) FROM offre";
+        PreparedStatement pst;
+        try {
+            pst = connexion.prepareStatement(requete);
+            ResultSet resultat = pst.executeQuery(requete);
+           if (resultat.next())
+           {
+                return resultat.getFloat(1);
+           }    
+            else
+           {
+               return 0F;
+           }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OffreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+      
+    @Override
+  public List<Offre> Recherchebyprix(int x, int y) {
+        List<Offre> L = new ArrayList<>();
+        String requete = "SELECT * FROM offre where prix BETWEEN " +x+" and "+y;
+        System.out.println(requete);
+        PreparedStatement pst;
+        try {
+            
+            pst = connexion.prepareStatement(requete);
+            ////pst.setInt(1,x);
+          //  pst.setInt(2,y);
+            ResultSet resultat = pst.executeQuery(requete);
+            while (resultat.next()) { 
+                Offre offre = new Offre();
+                offre.setId(resultat.getInt(1));
+                offre.setTitre(resultat.getString(2));
+                offre.setPrix(resultat.getFloat(3));
+                offre.setType(resultat.getString(4));
+                offre.setDescription(resultat.getString(5));
+                java.sql.Date d1=new java.sql.Date(resultat.getDate(6).getTime());
+            java.sql.Date d2=new java.sql.Date(resultat.getDate(7).getTime());
+                offre.setDate_debut(d1);
+                offre.setDate_fin(d2);
+                IUtilisateurDao k=new UtilisateurDao();
+                offre.setPrestataire(k.retrieveUtilisateurById(resultat.getInt(8)));
+                L.add(offre);
+            
+                System.out.println("Affichage en cours");
+            }
+                return L;
+                
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OffreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+  public List<Offre> DisplaybyprixandCategorie(int x , int y, String cat) {
+        List<Offre> L = new ArrayList<>();
+        String requete = "SELECT * FROM offre o where (o.prix BETWEEN " +x+" and "+y+") and (o.type='"+cat+"')";
+        System.out.println(requete);
+        PreparedStatement pst;
+        try {
+            
+            pst = connexion.prepareStatement(requete);
+            ////pst.setInt(1,x);
+          //  pst.setInt(2,y);
+            ResultSet resultat = pst.executeQuery(requete);
+            while (resultat.next()) { 
+                Offre offre = new Offre();
+                offre.setId(resultat.getInt(1));
+                offre.setTitre(resultat.getString(2));
+                offre.setPrix(resultat.getFloat(3));
+                offre.setType(resultat.getString(4));
+                offre.setDescription(resultat.getString(5));
+                java.sql.Date d1=new java.sql.Date(resultat.getDate(6).getTime());
+            java.sql.Date d2=new java.sql.Date(resultat.getDate(7).getTime());
+                offre.setDate_debut(d1);
+                offre.setDate_fin(d2);
+                IUtilisateurDao k=new UtilisateurDao();
+                offre.setPrestataire(k.retrieveUtilisateurById(resultat.getInt(8)));
+                L.add(offre);
+            
+                System.out.println("Affichage en cours");
+            }
+            System.out.println(L);
+                return L;
+                
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OffreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+  }
+  public List<Offre> Recherchebycategorie(String cat) {
+        List<Offre> L = new ArrayList<>();
+        String requete = "SELECT * FROM offre where type='"+cat+"'";
+        System.out.println(requete);
+        PreparedStatement pst;
+        try {
+            
+            pst = connexion.prepareStatement(requete);
+            ////pst.setInt(1,x);
+          //  pst.setInt(2,y);
+            ResultSet resultat = pst.executeQuery(requete);
+            while (resultat.next()) { 
+                Offre offre = new Offre();
+                offre.setId(resultat.getInt(1));
+                offre.setTitre(resultat.getString(2));
+                offre.setPrix(resultat.getFloat(3));
+                offre.setType(resultat.getString(4));
+                offre.setDescription(resultat.getString(5));
+                java.sql.Date d1=new java.sql.Date(resultat.getDate(6).getTime());
+            java.sql.Date d2=new java.sql.Date(resultat.getDate(7).getTime());
+                offre.setDate_debut(d1);
+                offre.setDate_fin(d2);
+                IUtilisateurDao k=new UtilisateurDao();
+                offre.setPrestataire(k.retrieveUtilisateurById(resultat.getInt(8)));
+                L.add(offre);
+            
+                System.out.println("Affichage en cours");
+            }
+                return L;
+                
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OffreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

@@ -16,10 +16,19 @@ public class Offre {
     private int id ;
     private String titre;
     private float prix;
+    private String type;
     private String description;
     private Date date_debut;
     private Date date_fin;
     private Utilisateur prestataire;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
    
     
     public Offre(){}
@@ -141,7 +150,15 @@ public class Offre {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Offre{" + "id=" + id + ", titre=" + titre + ", prix=" + prix + ", type=" + type + ", description=" + description + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", prestataire=" + prestataire + '}';
+    }
     
-    
+    public void affiche()
+    {
+    System.out.println(this.toString());
+    }
     
 }
