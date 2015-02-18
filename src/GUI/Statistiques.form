@@ -23,26 +23,21 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="G&#xe9;n&#xe9;rer les statistiques"/>
@@ -54,13 +49,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="meilleurOffre" max="32767" attributes="0"/>
-                      <Component id="prestatairesMieuxNote" max="32767" attributes="0"/>
-                      <Component id="nombrePaticipants" pref="423" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="listStatistiques" pref="573" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -68,35 +59,28 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="nombrePaticipants" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="prestatairesMieuxNote" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="meilleurOffre" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="177" max="32767" attributes="0"/>
+                  <Component id="listStatistiques" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="419" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="nombrePaticipants">
+        <Component class="javax.swing.JComboBox" name="listStatistiques">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Les &#xe9;v&#xe9;nements qui ont les plus nombres de participants "/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Les &#xe9;v&#xe9;nements qui ont les plus nombres de participants"/>
+                <StringItem index="1" value="Les prestataires de services les mieux not&#xe9;s"/>
+                <StringItem index="2" value="Les meilleurs offres"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombrePaticipantsActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listStatistiquesActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="prestatairesMieuxNote">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Les prestataires de services les mieux not&#xe9;s"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="meilleurOffre">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Les meilleurs offres"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
