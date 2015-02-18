@@ -7,13 +7,17 @@ package DaoClasse;
 
 import DaoInterface.IAdminDao;
 import Entites.Admin;
+import Entites.Evenement;
 import Entites.Reclamation;
+import Entites.Utilisateur;
 import Technique.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -119,4 +123,50 @@ public class AdminDao implements IAdminDao {
        
     }
 
-}
+    @Override
+    public List<Admin> retriveAllAdmin() {
+     List<Admin> listeAdmins = new ArrayList<>();
+        String requete = "SELECT * FROM administrateur";
+        
+        try {
+            Statement statement = connexion.createStatement();
+            ResultSet resultat = statement.executeQuery(requete);
+            while (resultat.next()) {   
+                
+                Admin admins = new Admin();
+                admins.setId(resultat.getInt(1));
+                admins.setNom(resultat.getString(2));
+                admins.setPrenom(resultat.getString(3));
+                admins.setMail(resultat.getString(4));
+                admins.setPwd(resultat.getString(5));
+                
+               
+                listeAdmins.add(admins);
+                System.out.println("Affichage en cours");
+            }
+            return listeAdmins;
+        } catch (SQLException ex) {
+            Logger.getLogger(EvenementDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erreur lors du chargement des administrateurs");
+            return null;
+        }
+        
+    
+    }
+    
+    
+    
+       
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+

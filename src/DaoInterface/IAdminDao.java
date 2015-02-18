@@ -6,7 +6,7 @@
 package DaoInterface;
 
 import Entites.Admin;
-import Entites.Offre;
+import java.util.List;
 
 /**
  *
@@ -18,6 +18,7 @@ public interface IAdminDao {
         public boolean supprimerAdmin(int id);
             public boolean modifierAdmin(Admin admin);
                 public Admin rechercherAdmin(int id);
+                 public List<Admin> retriveAllAdmin();
 
 
 
