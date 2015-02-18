@@ -7,9 +7,7 @@
 package DaoClasse;
 
 import DaoInterface.IPrestataireDao;
-import Entites.Evenement;
 import Entites.Prestataire;
-import Entites.Utilisateur;
 import Technique.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -108,8 +106,7 @@ String requete="DELETE FROM utilisateur where id=? AND nature=0";
             ResultSet resultat = statement.executeQuery(requete);
             if (resultat.next())
             {
-                 
-                prestataire.setId(resultat.getInt(1));
+               prestataire.setId(resultat.getInt(1));
                prestataire.setNom(resultat.getString(2));
                prestataire.setAdresse(resultat.getString(3));
                prestataire.setMail(resultat.getString(4));
