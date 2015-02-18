@@ -4,21 +4,52 @@
  * and open the template in the editor.
  */
 package GUI;
+
+import DaoClasse.OffreDao;
+import DaoInterface.IOffreDao;
 import java.util.Hashtable;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+
 /**
  *
  * @author user
  */
-public class Simulation extends javax.swing.JFrame {
+public class Simulation_1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Simulation
      */
-    public Simulation() {
+    public  static int x;
+    public static int y;
+    public static String cat;
+
+    public Simulation_1() {
         initComponents();
     }
 
+    public static String getCat() {
+        return cat;
+    }
+
+   
+
+    public int getx() {
+        return x;
+    }
+
+    public void setx(int x) {
+        this.x = x;
+    }
+     public int gety() {
+        return y;
+    }
+
+    public void sety(int y) {
+        this.y = y;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,15 +66,32 @@ public class Simulation extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         rangeSlider1 = new GUI.RangeSlider();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel1.setText("Categorie :");
 
+        OffreDao b=new OffreDao();
+        List <String> L=b.DisplayAllCategorie();
+        jComboBox1.addItem("Veuillez Choisir une Categorie");
+        for (String item : L) {
+            jComboBox1.addItem(item);
+        }
         jComboBox1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(0, 51, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sport", "Loisir" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel2.setText("Coût         :");
@@ -62,6 +110,21 @@ public class Simulation extends javax.swing.JFrame {
             }
         });
 
+        OffreDao max=new OffreDao();
+        rangeSlider1.setValue(max.getmin().intValue());
+        rangeSlider1.setMinimum(max.getmin().intValue());
+        rangeSlider1.setMaximum(max.getmax().intValue());
+        rangeSlider1.setPaintTicks(true);
+        rangeSlider1.setUpperValue(max.getmax().intValue());
+        rangeSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rangeSlider1StateChanged(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel3.setText("Valeur Selectionnée:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -75,14 +138,24 @@ public class Simulation extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
                         .addGap(208, 208, 208)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rangeSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(rangeSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(167, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(357, 357, 357)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(335, 335, 335)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,15 +170,19 @@ public class Simulation extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(rangeSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(100, 100, 100)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
 
-        rangeSlider1.setMinorTickSpacing(10);
-
+        rangeSlider1.setMinorTickSpacing(1000);
+        rangeSlider1.setMajorTickSpacing((max.getmax().intValue()+max.getmin().intValue())/4);
         rangeSlider1.setPaintLabels(true);
 
         rangeSlider1.setPaintTicks(true);
@@ -113,17 +190,6 @@ public class Simulation extends javax.swing.JFrame {
         rangeSlider1.setDoubleBuffered(true);
 
         rangeSlider1.setName("cout"); // NOI18N
-
-        // Code adding the component to the parent container - not shown here
-        Hashtable labelTable = new Hashtable();
-        labelTable.put( new Integer( 0 ), new JLabel("0") );
-        labelTable.put( new Integer( 50 ), new JLabel("50") );
-        labelTable.put( new Integer( 100 ), new JLabel("100") );
-        rangeSlider1.setLabelTable(labelTable);
-        int x=rangeSlider1.getMinimum();
-        int y=rangeSlider1.getMaximum();
-        rangeSlider1.setValue(x);
-        rangeSlider1.setUpperValue(y);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,10 +208,35 @@ public class Simulation extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    //IOffreDao ir = new OffreDao();
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if (jComboBox1.getSelectedIndex() != 0) {
+            Simulation_1.cat = jComboBox1.getSelectedItem().toString();
+
+            Simulation_1.x = rangeSlider1.getValue();
+
+            Simulation_1.y = rangeSlider1.getUpperValue();
+
+            new RechercherCataloque().setVisible(true);
+
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void rangeSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rangeSlider1StateChanged
+        // TODO add your handling code here:
+        jLabel4.setText("[" + rangeSlider1.getValue() + "," + rangeSlider1.getUpperValue() + "]");
+    }//GEN-LAST:event_rangeSlider1StateChanged
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        //System.out.println(jComboBox1.getSelectedItem().toString());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -164,21 +255,23 @@ public class Simulation extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Simulation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simulation_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Simulation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simulation_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Simulation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simulation_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Simulation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simulation_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Simulation().setVisible(true);
+                new Simulation_1().setVisible(true);
             }
         });
     }
@@ -189,11 +282,10 @@ public class Simulation extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private GUI.RangeSlider rangeSlider1;
     // End of variables declaration//GEN-END:variables
-
-
-
 
 }
